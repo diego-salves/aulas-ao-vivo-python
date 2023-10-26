@@ -6,7 +6,7 @@ Tipos primitivos:
 
 Numerico:
 Inteiro - int -> Numeros inteiros( -2,-1,1,2,3,4....)
-Real, Ponto futuante - float -> Numeros com casas decimais(2.56)
+Real, Ponto flutuante - float -> Numeros com casas decimais(2.56)
 Complexo - complex -> ver exemplo abaixo
 
 Texto:
@@ -91,4 +91,20 @@ print(set1)
 set2 = {False, 0, 1, True}
 print(set2)
 
-#Dicionário próxima aulas
+# Dicionário / Dict
+# o dicionário é ordenado(a partir do python 3.7), mutável e não permite valores duplicados.
+
+thisdict = {
+    "marca": "Ford",
+    "modelo": "Mustang",
+    "ano": 1964,
+    "blindado": False,
+    "cores": ["branco", "preto", "azul"]
+    #chave: valor
+}
+
+print(f'{thisdict["marca"]} {thisdict["modelo"]} {thisdict["ano"]} - Carro disponível nas seguintes cores: {thisdict["cores"]}')
+
+thisdict2 = dict(nome="Diego", idade=27)
+
+print(thisdict2)
