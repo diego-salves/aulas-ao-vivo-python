@@ -77,3 +77,11 @@ print(lista3)
 #próxima aula
 
 dicionario1 = {"nome": "diego", "idade": 27}
+
+# dicionario1.pop("nome") - remove o item especificado
+# dicionario1.popitem() - remove o último item
+# dicionario1.clear() - exclui todos os dados do dicionário
+
+print(dicionario1)
+
+reference = "https://www.w3schools.com/python/python_dictionaries_methods.asp"
