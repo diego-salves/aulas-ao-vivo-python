@@ -74,7 +74,6 @@ lista3.clear()
 print(lista3)
 
 #dicionário
-#próxima aula
 
 dicionario1 = {"nome": "diego", "idade": 27}
 
@@ -85,3 +84,11 @@ dicionario1 = {"nome": "diego", "idade": 27}
 print(dicionario1)
 
 reference = "https://www.w3schools.com/python/python_dictionaries_methods.asp"
+
+dicionario1.update({"profissão": "desenvolvedor"})
+
+print(dicionario1)
+
+dicionario1.update({"numeros": [1,2,3,4], "sexo": "masculino"})
+
+print(dicionario1)
