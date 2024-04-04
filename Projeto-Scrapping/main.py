@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+import json
 
 
 def get_all_links(url):
@@ -28,39 +29,38 @@ def get_all_links(url):
 
 def get_all_content(urls):
     """
-    function
+    function to get all data from pages previously found
     """
     try:
-        req = requests.get(urls, verify=False)
-        site = BeautifulSoup(req.text, "html.parser")
-        all_content = dict()
+        all_data = dict()
+        for url in urls:
+            req = requests.get(url, verify=False)
+            site = BeautifulSoup(req.text, "html.parser")
+            script_tags = site.find_all('script')
 
-        for link in site.find_all('a'):
-            href = link.get('href')
-            if isinstance(href, str) and href.startswith('https://www.cnnbrasil.com.br/tecnologia'):
-                if href == "https://www.cnnbrasil.com.br/tecnologia/":
-                    continue
-                else:
-                    all_links.add(href)
+            for script in script_tags:
+                if 'articleBody' in script.text:
+                    json_data = json.loads(script.text)
+                    articleBody = json_data.get('articleBody')
+                    headline = json_data.get('headline')
+                    mainEntity = json_data.get('mainEntityOfPage')
+                    description = json_data.get('description')
+                    valores = {'articleBody': articleBody,
+                               'headline': headline,
+                               'description': description}
+                    data = {mainEntity: valores}
+                    all_data.update(data)
 
-        all_links_list = list(sorted(all_links))
+                    # print(f'CHAVE: {data.keys()}. \n VALOR: {data.values()}')
+                    break
+        return all_data
 
-        return all_links_list
     except Exception as e:
         return print(f"Error when trying to reach site: {e}")
 
 
-# news_page = list(sorted(all_links))
-# # sorted(news_page)
-# print(news_page)
-#
+# running functions
 
-
-# for page in news_page[1]:
-#     req = requests.get(page, verify=False)
-#     site = BeautifulSoup(req.text, "html.parser")
-
-# running function
-all_links = get_all_links("https://www.cnnbrasil.com.br/")
-
-print(all_links)
+links = get_all_links("https://www.cnnbrasil.com.br/")
+content = get_all_content(links)
+print(content)
