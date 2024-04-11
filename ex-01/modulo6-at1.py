@@ -30,9 +30,6 @@ O arquivo de saída possui o seguinte formato:
 A regra é que o intervalo de endereçamento de IP vai de 0.0.0.0 a 255.255.255.255.
 """
 
-lista = ['200.135.80.9', '192.168.1.1', '8.35.67.74', '257.34.2.5', '85.345.1.2', '1.2.3.4', '9.8.234.5',
-         '192.168.0.256']
-
 
 def valida_ips(lista_de_ips):
     ips_validos = []
@@ -45,7 +42,21 @@ def valida_ips(lista_de_ips):
         else:
             ips_invalidos.append(ip)
 
-    return print("IPs válidos:", ips_validos), print("IPs Inválidos:", ips_invalidos)
+    return ips_validos, ips_invalidos
 
 
-valida_ips(lista)
+# Lendo a lista de um arquivo .txt
+with open('lista_ips.txt', 'r') as f:
+    lista_de_ips = f.read().splitlines()
+
+ips_validos, ips_invalidos = valida_ips(lista_de_ips)
+
+# Escrevendo os IPs válidos em um novo arquivo
+with open('ips_validos.txt', 'w') as f:
+    for ip in ips_validos:
+        f.write(ip + '\n')
+
+# Escrevendo os IPs inválidos em um novo arquivo
+with open('ips_invalidos.txt', 'w') as f:
+    for ip in ips_invalidos:
+        f.write(ip + '\n')
